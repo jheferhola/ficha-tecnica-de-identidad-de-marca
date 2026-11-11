@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEMAZON - Ficha Técnica de Identidad de Marca</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amazon: {
+                            50: '#e6f9f0',
+                            100: '#c3f0d8',
+                            400: '#10b981',
+                            500: '#00a859',
+                            600: '#008a48',
+                            700: '#006b37',
+                            800: '#034d28',
+                            900: '#01321a'
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        },
+                        darkbg: '#0c1015',
+                        darkcard: '#141a23',
+                        darkborder: '#222d3d'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0c1015; }
+        ::-webkit-scrollbar-thumb { background: #222d3d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00a859; }
+
+        /* Efectos Glass y Brillos */
+        .glass-panel {
+            background: rgba(20, 26, 35, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(34, 45, 61, 0.85);
+        }
+        .glow-emerald { box-shadow: 0 0 35px rgba(0, 168, 89, 0.25); }
+        .glow-gold { box-shadow: 0 0 30px rgba(251, 191, 36, 0.2); }
+
+        /* Recuadros para colocar tus imágenes (Dropzones) */
+        .img-dropzone {
+            border: 2px dashed #2d3b4e;
+            background: rgba(12, 16, 21, 0.65);
+            transition: all 0.3s ease;
+        }
+        .img-dropzone:hover {
+            border-color: #00a859;
+            background: rgba(0, 168, 89, 0.06);
+        }
+
+        /* ==========================================
+           ESTILOS CARRUSEL CIRCULAR INTERACTIVO
+           ========================================== */
+        .wheel-stage {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) {
+            .wheel-stage {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        .orbit-ring {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 2px dashed rgba(16, 185, 129, 0.35);
+            box-shadow: inset 0 0 30px rgba(0, 168, 89, 0.08), 0 0 30px rgba(0, 168, 89, 0.08);
+            transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @media (min-width: 640px) {
+            .orbit-ring {
+                width: 310px;
+                height: 310px;
+            }
+        }
+
+        .wheel-node {
+            position: absolute;
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #141a23;
+            border: 2px solid #222d3d;
+            transition: all 0.5s ease;
+            z-index: 20;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (min-width: 640px) {
+            .wheel-node {
+                width: 96px;
+                height: 96px;
+            }
+        }
+
+        .wheel-node:hover {
+            border-color: #10b981;
+            transform: scale(1.08);
+        }
+
+        .wheel-node.active-node {
+            background: linear-gradient(135deg, #00a859 0%, #034d28 100%);
+            border-color: #fbbf24;
+            box-shadow: 0 0 30px rgba(0, 168, 89, 0.65), 0 0 15px rgba(251, 191, 36, 0.4);
+        }
+
+        /* Posicionamiento de los 3 nodos en 120° */
+        .node-0 { top: -42px; left: 50%; margin-left: -42px; }
+        .node-1 { bottom: 22px; right: -24px; }
+        .node-2 { bottom: 22px; left: -24px; }
+
+        @media (min-width: 640px) {
+            .node-0 { top: -48px; left: 50%; margin-left: -48px; }
+            .node-1 { bottom: 28px; right: -28px; }
+            .node-2 { bottom: 28px; left: -28px; }
+        }
+
+        /* Contra-rotación para mantener texto recto */
+        .node-content {
+            transition: transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+        }
+
+        .wheel-core {
+            position: relative;
+            z-index: 10;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #1c2533, #0c1015);
+            border: 3px solid rgba(0, 168, 89, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(0, 168, 89, 0.2);
+        }
+
+        @media (min-width: 640px) {
+            .wheel-core {
+                width: 175px;
+                height: 175px;
+            }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-panel {
+            animation: fadeSlideUp 0.45s ease forwards;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-100 font-sans antialiased selection:bg-amazon-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- HEADER NAVBAR -->
+    <header class="sticky top-0 z-50 bg-darkbg/95 backdrop-blur-md border-b border-darkborder transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo con enlace a tu página principal -->
+                <a href="https://jheferhola.github.io/" class="flex items-center gap-3 group" title="Ir a la página principal de CINEMAZON">
+                    <div class="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-darkcard rounded-xl p-1.5 border border-darkborder">
+                        <img src="img/logocine.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/141a23/10b981?text=CZ';" class="w-full h-full object-contain" alt="Logo CINEMAZON">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-tight text-white font-sans">CINEMA<span class="text-amazon-500">ZON</span></span>
+                        <span class="text-[9px] tracking-widest text-emerald-400 font-extrabold uppercase block -mt-1">Ficha Técnica de Identidad</span>
+                    </div>
+                </a>
+
+                <!-- Menú de Navegación -->
+                <nav class="hidden md:flex items-center gap-6 text-xs font-bold text-gray-300">
+                    <a href="#ficha-general" class="hover:text-amazon-400 transition-colors">Ficha General</a>
+                    <a href="#carrusel-pilares" class="text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-compass"></i> Carrusel de Pilares
+                    </a>
+                    <a href="#simbolos" class="hover:text-amazon-400 transition-colors">Iconología & Símbolos</a>
+                    <a href="#ejercicio-visual" class="hover:text-gold-400 transition-colors">Ejercicio Visual</a>
+                    <a href="#comparativo" class="hover:text-amazon-400 transition-colors">Cuadro Comparativo</a>
+                    <a href="#conclusion" class="hover:text-amazon-400 transition-colors">Conclusión</a>
+                </nav>
+
+                <!-- Botón Volver -->
+                <div class="flex items-center gap-3">
+                    <a href="https://jheferhola.github.io/" class="inline-flex items-center gap-2 bg-gradient-to-r from-amazon-500 to-emerald-600 hover:from-amazon-600 hover:to-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-lg shadow-amazon-500/20 transition-all transform hover:scale-105">
+                        <i class="fa-solid fa-house"></i> <span class="hidden sm:inline">Inicio</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO Y FICHA TÉCNICA GENERAL -->
+    <section id="ficha-general" class="relative py-14 lg:py-20 overflow-hidden border-b border-darkborder">
+        <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-amazon-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <div class="inline-flex items-center gap-2 bg-amazon-500/10 border border-amazon-500/30 text-emerald-400 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-5">
+                    <span class="w-2 h-2 rounded-full bg-amazon-500 animate-ping"></span> Manual de Identidad Corporativa • Satipo
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                    FICHA TÉCNICA DE IDENTIDAD DE <span class="text-transparent bg-clip-text bg-gradient-to-r from-amazon-400 via-emerald-300 to-gold-400">CINEMAZON</span>
+                </h1>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Imagología • Iconología • Imagen Verbal — <strong>CINEMAZON PERÚ S.A.C.</strong>
+                </p>
+            </div>
+
+            <!-- IMAGEN 01: PORTADA DEL COMPLEJO / SALAS DE CINE (Como en la página 1 del Word) -->
+            <div class="max-w-5xl mx-auto mb-10">
+                <div class="glass-panel rounded-3xl p-4 sm:p-6 shadow-2xl">
+                    <div class="flex items-center justify-between mb-3 px-1">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+                            <i class="fa-solid fa-building"></i> Identidad Arquitectónica y Lobby Temático
+                        </span>
+                        <span class="text-[11px] text-gray-400 font-mono">Ruta: img/portada-cine.jpg</span>
+                    </div>
+                    <div class="img-dropzone rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[380px] flex flex-col items-center justify-center relative">
+                        <img src="img/portada-cine.jpg" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                             class="w-full max-h-[440px] object-cover rounded-xl" 
+                             alt="Salas de Cine CINEMAZON - Fachada e Interior">
+                        <!-- Placeholder visible si aún no pones la imagen en la carpeta img/ -->
+                        <div class="flex flex-col items-center justify-center text-center p-8 text-gray-400 space-y-2">
+                            <div class="w-14 h-14 rounded-2xl bg-amazon-500/10 border border-amazon-500/30 flex items-center justify-center text-amazon-400 text-2xl mb-1">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <p class="text-sm font-bold text-gray-200">Imagen 01: Lobby y Salas de Cine CINEMAZON</p>
+                            <p class="text-xs text-gray-400 max-w-md">Guarda tu primera imagen del documento (Salas de Cine con mural amazónico) como <code class="text-emerald-400 bg-darkbg px-1.5 py-0.5 rounded">img/portada-cine.jpg</code></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta Resumen de Datos Generales -->
+            <div class="max-w-5xl mx-auto glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-darkbg/80 border border-darkborder p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-amazon-400 block mb-1">Nombre de Marca</span>
+                        <p class="text-base font-extrabold text-white">CINEMAZON PERÚ S.A.C.</p>
+                    </div>
+                    <div class="bg-darkbg/80 border border-darkborder p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-emerald-400 block mb-1">Rubro</span>
+                        <p class="text-sm font-bold text-gray-200">Entretenimiento y cinematografía</p>
+                    </div>
+                    <div class="bg-darkbg/80 border border-darkborder p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-gold-400 block mb-1">Eslogan Oficial</span>
+                        <p class="text-sm font-extrabold text-gold-400 italic">«El encuentro de la selva con el cine»</p>
+                    </div>
+                    <div class="bg-darkbg/80 border border-darkborder p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-amazon-400 block mb-1">Concepto</span>
+                        <p class="text-xs text-gray-300 leading-relaxed">Innovación tecnológica, entretenimiento inmersivo y orgullo de la Selva Central.</p>
+                    </div>
+                    <div class="bg-darkbg/80 border border-darkborder p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-emerald-400 block mb-1">Estilo Gráfico</span>
+                        <p class="text-xs text-gray-300 leading-relaxed">Tecnológico contemporáneo con identidad regional.</p>
+                    </div>
+                    <div class="bg-darkbg/80 border border-darkborder p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-gold-400 block mb-1">Personalidad</span>
+                        <p class="text-xs text-gray-300 leading-relaxed">Innovadora, acogedora, vibrante y auténtica.</p>
+                    </div>
+                </div>
+
+                <!-- Paleta Cromática Interactiva -->
+                <div class="mt-6 pt-6 border-t border-darkborder flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Paleta Corporativa (Clic para copiar HEX):</span>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button onclick="copyColor('#00a859', 'Verde Selva')" class="flex items-center gap-2 bg-darkbg border border-darkborder hover:border-amazon-500 px-3 py-1.5 rounded-xl text-xs font-bold transition-all">
+                            <span class="w-4 h-4 rounded-full bg-[#00a859]"></span> Verde Selva
+                        </button>
+                        <button onclick="copyColor('#0c1015', 'Negro Noche')" class="flex items-center gap-2 bg-darkbg border border-darkborder hover:border-gray-400 px-3 py-1.5 rounded-xl text-xs font-bold transition-all">
+                            <span class="w-4 h-4 rounded-full bg-[#0c1015] border border-gray-500"></span> Negro Noche
+                        </button>
+                        <button onclick="copyColor('#fbbf24', 'Dorado Gold')" class="flex items-center gap-2 bg-darkbg border border-darkborder hover:border-gold-400 px-3 py-1.5 rounded-xl text-xs font-bold transition-all">
+                            <span class="w-4 h-4 rounded-full bg-[#fbbf24]"></span> Dorado Gold
+                        </button>
+                        <button onclick="copyColor('#b91c1c', 'Rojo Pasión')" class="flex items-center gap-2 bg-darkbg border border-darkborder hover:border-red-500 px-3 py-1.5 rounded-xl text-xs font-bold transition-all">
+                            <span class="w-4 h-4 rounded-full bg-[#b91c1c]"></span> Rojo Pasión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN PRINCIPAL: CARRUSEL CIRCULAR INTERACTIVO (ROTATING WHEEL)
+         ================================================================= -->
+    <section id="carrusel-pilares" class="py-16 lg:py-24 bg-darkbg border-b border-darkborder relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-amazon-500 text-xs font-black uppercase tracking-widest">Explorador Interactivo de Marca</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white mt-1">Pilares de Identidad CINEMAZON</h2>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2">
+                    Gira la rueda orbital haciendo clic en cada pilar para explorar su ficha técnica y su imagen correspondiente.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- COLUMNA IZQUIERDA: RUEDA GIRATORIA INTERACTIVA (5 cols) -->
+                <div class="lg:col-span-5 flex flex-col items-center">
+                    <div class="wheel-stage">
+                        <!-- Anillo Orbital Rotatorio -->
+                        <div id="orbitRing" class="orbit-ring" style="transform: rotate(0deg);">
+                            
+                            <!-- Nodo 0: Imagología -->
+                            <button onclick="selectPillar(0)" id="node-0" class="wheel-node node-0 active-node" aria-label="Imagología">
+                                <div class="node-content" id="content-0" style="transform: rotate(0deg);">
+                                    <i class="fa-solid fa-eye text-xl sm:text-2xl text-gold-400 mb-1"></i>
+                                    <span class="text-[10px] sm:text-xs font-black text-white block leading-tight">1. Imago-<br>logía</span>
+                                </div>
+                            </button>
+
+                            <!-- Nodo 1: Iconología -->
+                            <button onclick="selectPillar(1)" id="node-1" class="wheel-node node-1" aria-label="Iconología">
+                                <div class="node-content" id="content-1" style="transform: rotate(0deg);">
+                                    <i class="fa-solid fa-feather-pointed text-xl sm:text-2xl text-emerald-400 mb-1"></i>
+                                    <span class="text-[10px] sm:text-xs font-black text-white block leading-tight">2. Icono-<br>logía</span>
+                                </div>
+                            </button>
+
+                            <!-- Nodo 2: Imagen Verbal -->
+                            <button onclick="selectPillar(2)" id="node-2" class="wheel-node node-2" aria-label="Imagen Verbal">
+                                <div class="node-content" id="content-2" style="transform: rotate(0deg);">
+                                    <i class="fa-solid fa-comment-dots text-xl sm:text-2xl text-amazon-400 mb-1"></i>
+                                    <span class="text-[10px] sm:text-xs font-black text-white block leading-tight">3. Imagen<br>Verbal</span>
+                                </div>
+                            </button>
+
+                        </div>
+
+                        <!-- Núcleo Central Fijo -->
+                        <div class="wheel-core">
+                            <img src="img/logocine.png" onerror="this.onerror=null; this.src='https://placehold.co/80x80/141a23/10b981?text=TUCA';" class="w-12 h-12 sm:w-14 sm:h-14 object-contain mb-1.5" alt="Tucán Cinemazon">
+                            <span class="text-xs font-black text-white tracking-tight">CINEMA<span class="text-amazon-500">ZON</span></span>
+                            <span id="coreSubtitle" class="text-[9px] font-bold text-gold-400 uppercase tracking-wider mt-0.5">Pilar 01 / 03</span>
+                        </div>
+                    </div>
+
+                    <!-- Controles Inferiores del Carrusel -->
+                    <div class="flex items-center gap-4 mt-8">
+                        <button onclick="prevPillar()" class="px-4 py-2 rounded-xl bg-darkcard border border-darkborder hover:border-amazon-500 text-gray-300 hover:text-white text-xs font-bold transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-rotate-left"></i> Anterior
+                        </button>
+                        <div class="flex gap-2">
+                            <span id="dot-0" class="w-2.5 h-2.5 rounded-full bg-amazon-500 transition-all"></span>
+                            <span id="dot-1" class="w-2.5 h-2.5 rounded-full bg-darkborder transition-all"></span>
+                            <span id="dot-2" class="w-2.5 h-2.5 rounded-full bg-darkborder transition-all"></span>
+                        </div>
+                        <button onclick="nextPillar()" class="px-4 py-2 rounded-xl bg-darkcard border border-darkborder hover:border-amazon-500 text-gray-300 hover:text-white text-xs font-bold transition-all flex items-center gap-2">
+                            Siguiente <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA: PANEL DINÁMICO CON IMAGEN Y TABLA (7 cols) -->
+                <div class="lg:col-span-7">
+                    <div id="pillarDisplayCard" class="glass-panel rounded-3xl p-6 sm:p-8 border border-amazon-500/40 glow-emerald animate-panel">
+                        <!-- El contenido e imagen de cada pilar se renderizan dinámicamente aquí -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: INTERPRETACIÓN DE LOS SÍMBOLOS (ICONOLOGÍA) -->
+    <section id="simbolos" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-gold-400 text-xs font-black uppercase tracking-widest">Desglose Semiótico</span>
+                <h2 class="text-3xl font-black text-white mt-1">Interpretación de los Símbolos</h2>
+                <p class="text-gray-400 text-xs mt-2">Significado cultural y tecnológico de cada elemento gráfico de CINEMAZON.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Símbolo 1 -->
+                <div class="bg-darkcard border border-darkborder hover:border-amazon-500 rounded-2xl p-6 transition-all group">
+                    <div class="w-12 h-12 rounded-2xl bg-amazon-500/10 border border-amazon-500/30 text-amazon-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-crow"></i>
+                    </div>
+                    <h4 class="text-base font-extrabold text-white mb-2">El Tucán (Mascota)</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Representa la fauna emblemática de la Selva Central, aportando identidad, cercanía y carisma a la marca.
+                    </p>
+                </div>
+
+                <!-- Símbolo 2 -->
+                <div class="bg-darkcard border border-darkborder hover:border-gold-400 rounded-2xl p-6 transition-all group">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <h4 class="text-base font-extrabold text-white mb-2">Proyección 4K y Ondas</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Identifica la tecnología cinematográfica de vanguardia y el sistema de sonido envolvente en sala.
+                    </p>
+                </div>
+
+                <!-- Símbolo 3 -->
+                <div class="bg-darkcard border border-darkborder hover:border-emerald-400 rounded-2xl p-6 transition-all group">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <h4 class="text-base font-extrabold text-white mb-2">Dorado Gold y Verde</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Simbolizan la riqueza natural de Satipo, el éxito, la energía vibrante y la elegancia de la experiencia.
+                    </p>
+                </div>
+
+                <!-- Símbolo 4 -->
+                <div class="bg-darkcard border border-darkborder hover:border-red-400 rounded-2xl p-6 transition-all group">
+                    <div class="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h4 class="text-base font-extrabold text-white mb-2">Patrones Tropicales</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Representan la cultura viva, el orgullo regional y la ambientación temática inmersiva de las instalaciones.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =================================================================
+         SECCIÓN: EJERCICIO VISUAL (LAS 2 IMÁGENES DE TU DOCUMENTO)
+         ================================================================= -->
+    <section id="ejercicio-visual" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-gold-400 text-xs font-black uppercase tracking-widest">Ejercicio Conceptual</span>
+                <h2 class="text-3xl font-black text-white mt-1">Convertir una Palabra o Frase en Imagen Visual</h2>
+                <p class="text-emerald-400 font-extrabold text-base sm:text-lg mt-2 italic">
+                    “El Encuentro de La Selva Con El Cine”
+                </p>
+            </div>
+
+            <!-- Grid de 2 Columnas para las 2 ilustraciones conceptuales de tu documento -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Cuadro Imagen Ejercicio 1 -->
+                <div class="glass-panel rounded-3xl p-5 flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-extrabold text-amazon-400 uppercase tracking-wider">Propuesta Visual 01</span>
+                        <span class="text-[11px] text-gray-400 font-mono">img/ejercicio-selva-1.jpg</span>
+                    </div>
+                    <div class="img-dropzone rounded-2xl overflow-hidden h-72 sm:h-80 flex flex-col items-center justify-center">
+                        <img src="img/ejercicio-selva-1.jpg" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                             class="w-full h-full object-cover rounded-xl" 
+                             alt="Tucán con cinta de cine y canchita en la selva">
+                        <div class="flex flex-col items-center justify-center text-center p-6 text-gray-400 space-y-2">
+                            <i class="fa-solid fa-clapperboard text-3xl text-amazon-500"></i>
+                            <p class="text-xs font-bold text-gray-200">Imagen Ejercicio Visual 01</p>
+                            <p class="text-[11px] text-gray-400">Guarda tu arte del tucán con la cinta de película y canchita como <code class="text-emerald-400">img/ejercicio-selva-1.jpg</code></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cuadro Imagen Ejercicio 2 -->
+                <div class="glass-panel rounded-3xl p-5 flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-extrabold text-gold-400 uppercase tracking-wider">Propuesta Visual 02</span>
+                        <span class="text-[11px] text-gray-400 font-mono">img/ejercicio-selva-2.jpg</span>
+                    </div>
+                    <div class="img-dropzone rounded-2xl overflow-hidden h-72 sm:h-80 flex flex-col items-center justify-center">
+                        <img src="img/ejercicio-selva-2.jpg" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                             class="w-full h-full object-cover rounded-xl" 
+                             alt="Sala de cine inmersiva en medio de la selva">
+                        <div class="flex flex-col items-center justify-center text-center p-6 text-gray-400 space-y-2">
+                            <i class="fa-solid fa-film text-3xl text-gold-400"></i>
+                            <p class="text-xs font-bold text-gray-200">Imagen Ejercicio Visual 02</p>
+                            <p class="text-[11px] text-gray-400">Guarda tu arte de la sala de cine con el proyector y vegetación como <code class="text-gold-400">img/ejercicio-selva-2.jpg</code></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: CUADRO COMPARATIVO GENERAL Y CONCLUSIÓN -->
+    <section id="comparativo" class="py-16 bg-darkbg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- 4. Cuadro Comparativo General -->
+                <div class="lg:col-span-7 bg-darkcard border border-darkborder rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-amazon-500 text-xs font-black uppercase tracking-widest">Síntesis Corporativa</span>
+                        <h3 class="text-2xl font-black text-white mt-1 mb-6">4. Cuadro Comparativo General</h3>
+
+                        <div class="overflow-x-auto rounded-2xl border border-darkborder">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-darkbg text-gray-400 uppercase text-[10px] tracking-wider">
+                                    <tr>
+                                        <th class="p-4">Concepto</th>
+                                        <th class="p-4">Función en CINEMAZON</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-darkborder text-gray-300">
+                                    <tr class="hover:bg-darkbg/60 transition-colors">
+                                        <td class="p-4 font-extrabold text-emerald-400 whitespace-nowrap">
+                                            <i class="fa-solid fa-eye mr-2"></i> Imagología
+                                        </td>
+                                        <td class="p-4 leading-relaxed">
+                                            Construye la percepción global, la reputación y la imagen corporativa del complejo.
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-darkbg/60 transition-colors">
+                                        <td class="p-4 font-extrabold text-gold-400 whitespace-nowrap">
+                                            <i class="fa-solid fa-feather-pointed mr-2"></i> Iconología
+                                        </td>
+                                        <td class="p-4 leading-relaxed">
+                                            Aporta significado mediante el uso del tucán, los colores institucionales y la simbología tecnológica-regional.
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-darkbg/60 transition-colors">
+                                        <td class="p-4 font-extrabold text-amazon-400 whitespace-nowrap">
+                                            <i class="fa-solid fa-comment-dots mr-2"></i> Imagen Verbal
+                                        </td>
+                                        <td class="p-4 leading-relaxed">
+                                            Comunica la personalidad juvenil e innovadora mediante el eslogan, redes sociales y mensajes de cartelera.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-darkborder flex items-center justify-between text-[11px] text-gray-500">
+                        <span>CINEMAZON PERÚ S.A.C.</span>
+                        <span>Satipo • Selva Central</span>
+                    </div>
+                </div>
+
+                <!-- 5. Conclusión -->
+                <div id="conclusion" class="lg:col-span-5 bg-gradient-to-br from-amazon-900/50 via-darkcard to-darkbg border border-amazon-500/40 rounded-3xl p-6 sm:p-8 flex flex-col justify-between glow-emerald">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amazon-500/20 border border-amazon-500/40 flex items-center justify-center text-gold-400 text-xl mb-5">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <span class="text-gold-400 text-xs font-black uppercase tracking-widest">Cierre Estratégico</span>
+                        <h3 class="text-2xl font-black text-white mt-1 mb-4">5. Conclusión</h3>
+                        
+                        <p class="text-gray-200 text-xs sm:text-sm leading-relaxed mb-4">
+                            <strong>CINEMAZON</strong> integra armónicamente la imagología, la iconología y la imagen verbal para consolidar una identidad corporativa sólida y diferenciada. La imagología proyecta un complejo moderno y acogedor; la iconología dota de significado a sus símbolos arraigados en la Selva Central; y la imagen verbal comunica su propuesta de valor a través de canales dinámicos como TikTok y su plataforma web.
+                        </p>
+                        <p class="text-emerald-300 text-xs sm:text-sm font-semibold leading-relaxed">
+                            De esta manera, CINEMAZON se posiciona como el referente indiscutible de entretenimiento y cultura en Satipo, uniendo la más alta tecnología audiovisual con el orgullo de su identidad regional.
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-amazon-500/30 flex items-center gap-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                        <span class="text-xs font-bold text-gray-300">Identidad Validada • SENATI 2026</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-darkbg border-t border-darkborder py-8 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="font-bold text-gray-400 mb-1">CINEMAZON PERÚ S.A.C. — «El encuentro de la selva con el cine»</p>
+            <p>Ficha Técnica de Imagología, Iconología e Imagen Verbal • Satipo, Junín.</p>
+        </div>
+    </footer>
+
+    <!-- Notificación Toast al copiar -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-amazon-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2">
+        <i class="fa-solid fa-check-circle"></i> <span id="toastMsg">Copiado</span>
+    </div>
+
+    <!-- JAVASCRIPT DEL CARRUSEL CIRCULAR INTERACTIVO -->
+    <script>
+        const pillarsData = [
+            {
+                id: 0,
+                badge: "Pilar 01 • Percepción y Construcción",
+                title: "1. IMAGOLOGÍA",
+                icon: "fa-eye",
+                imageSrc: "img/imagologia.png",
+                imageLabel: "Infografía: 1. Imagología (Tucán, Claqueta y Paleta)",
+                imageHint: "Guarda tu infografía de Imagología como img/imagologia.png",
+                specs: [
+                    { label: "Definición", value: "Estudia cómo se construye y percibe la imagen de una marca ante el público." },
+                    { label: "Aplicación", value: "Construcción de la imagen corporativa y digital de CINEMAZON." },
+                    { label: "Objetivo", value: "Transmitir una imagen moderna, inmersiva, confiable y arraigada en la región." },
+                    { label: "Personalidad", value: "Tecnológica, cercana, dinámica y cultural." },
+                    { label: "Público objetivo", value: "Jóvenes, familias y amantes del cine interesados en experiencias audiovisuales de alta calidad con identidad local." },
+                    { label: "Identidad visual", value: "Logotipo inspirado en la fauna de la selva (el tucán), la experiencia 4K y la naturaleza." },
+                    { label: "Colores corporativos", value: "Verde Selva, Negro Noche, Dorado Gold y Rojo Pasión." },
+                    { label: "Percepción deseada", value: "Que el consumidor relacione la marca con la máxima calidad de proyección cinematográfica combinada con la magia de la Selva Central." }
+                ],
+                analysis: "CINEMAZON busca proyectar una imagen vanguardista pero conectada con la riqueza y la cultura de Satipo. Su identidad transmite modernidad y calidez mediante un concepto visual que rompe esquemas en la región.",
+                result: "Una marca sólida y altamente recordada que transmita confianza, entretenimiento de nivel y arraigo cultural."
+            },
+            {
+                id: 1,
+                badge: "Pilar 02 • Significado Simbólico",
+                title: "2. ICONOLOGÍA",
+                icon: "fa-feather-pointed",
+                imageSrc: "img/logo-horizontal.png",
+                imageLabel: "Logotipo Oficial Horizontal CINEMAZON",
+                imageHint: "Guarda tu logotipo horizontal con el tucán como img/logo-horizontal.png",
+                specs: [
+                    { label: "Definición", value: "Estudia e interpreta los significados simbólicos y culturales de las imágenes." },
+                    { label: "Aplicación", value: "Uso de símbolos relacionados con el cine, la tecnología y la Selva Central." },
+                    { label: "Objetivo", value: "Transmitir modernidad, entretenimiento y conexión con el entorno natural mediante elementos gráficos." },
+                    { label: "Símbolo principal", value: "La silueta del tucán integrada con elementos de proyección audiovisual y modernidad." },
+                    { label: "Elementos secundarios", value: "Patrones tropicales, paleta verde/dorada y tipografías corporativas sólidas." },
+                    { label: "Estilo gráfico", value: "Ilustraciones vectoriales limpias, geométricas y de alto impacto visual." },
+                    { label: "Significado", value: "Representar el origen conceptual de la marca, su producto y su inspiración cultural." }
+                ],
+                analysis: "La iconología de CINEMAZON utiliza elementos visuales que fusionan el séptimo arte con la biodiversidad de Satipo. La combinación de la mascota, los colores corporativos y los íconos de sala permite crear una identidad simbólica única en la región.",
+                result: "Una identidad gráfica con símbolos potentes y significados claros que refuercen la esencia de CINEMAZON."
+            },
+            {
+                id: 2,
+                badge: "Pilar 03 • Identidad Comunicativa",
+                title: "3. IMAGEN VERBAL",
+                icon: "fa-comment-dots",
+                imageSrc: "img/dulceria-mockups.jpg",
+                imageLabel: "Aplicaciones de Marca: Vasos, Popcorn y Empaques Regionales",
+                imageHint: "Guarda tu foto de los vasos y empaques de dulcería como img/dulceria-mockups.jpg",
+                specs: [
+                    { label: "Definición", value: "Conjunto de palabras, frases, mensajes y expresiones que construyen la identidad comunicativa de una marca." },
+                    { label: "Aplicación", value: "Nombre comercial, eslogan, redes sociales (TikTok/Instagram), sitio web y carteleras." },
+                    { label: "Objetivo", value: "Comunicar la personalidad y los valores de CINEMAZON mediante mensajes dinámicos y cercanos." },
+                    { label: "Nombre", value: "CINEMAZON PERÚ S.A.C." },
+                    { label: "Eslogan", value: "«El Encuentro De La Selva Con El Cine»." },
+                    { label: "Tono comunicativo", value: "Dinámico, juvenil, cercano, inmersivo y orgulloso de su origen." },
+                    { label: "Palabras clave", value: "Cine, 4K, estreno, Selva Central, asientos, dulcería, combo selva, cartelera y experiencia." },
+                    { label: "Tipografía propuesta", value: "Plus Jakarta Sans para títulos y subtítulos institucionales." },
+                    { label: "Estilo verbal", value: "Fresco, atractivo, orientado a la cultura pop y la interacción digital." }
+                ],
+                analysis: "La imagen verbal de CINEMAZON transmite la emoción de vivir un estreno cinematográfico de primer nivel sin salir de la región. Utiliza expresiones modernas que conectan con su comunidad digital (especialmente en TikTok) y refuerzan su valor diferenciador.",
+                adExample: "«¡Siente la verdadera magia del cine en Satipo! Disfruta de la mejor proyección 4K, sonido envolvente y nuestro \"Combo Selva\". CINEMAZON, el encuentro de la selva con el cine».",
+                result: "Una comunicación coherente, persuasiva y viralizable que fortalezca el engagement con los espectadores."
+            }
+        ];
+
+        let currentIndex = 0;
+        let currentRotation = 0;
+
+        function selectPillar(index) {
+            const diff = index - currentIndex;
+            if (diff === 1 || diff === -2) {
+                currentRotation -= 120;
+            } else if (diff === -1 || diff === 2) {
+                currentRotation += 120;
+            }
+            currentIndex = index;
+            updateCarouselUI();
+        }
+
+        function nextPillar() {
+            currentRotation -= 120;
+            currentIndex = (currentIndex + 1) % 3;
+            updateCarouselUI();
+        }
+
+        function prevPillar() {
+            currentRotation += 120;
+            currentIndex = (currentIndex - 1 + 3) % 3;
+            updateCarouselUI();
+        }
+
+        function updateCarouselUI() {
+            const ring = document.getElementById('orbitRing');
+            ring.style.transform = `rotate(${currentRotation}deg)`;
+
+            for (let i = 0; i < 3; i++) {
+                const node = document.getElementById(`node-${i}`);
+                const content = document.getElementById(`content-${i}`);
+                const dot = document.getElementById(`dot-${i}`);
+
+                content.style.transform = `rotate(${-currentRotation}deg)`;
+
+                if (i === currentIndex) {
+                    node.classList.add('active-node');
+                    dot.classList.remove('bg-darkborder');
+                    dot.classList.add('bg-amazon-500', 'w-6');
+                } else {
+                    node.classList.remove('active-node');
+                    dot.classList.remove('bg-amazon-500', 'w-6');
+                    dot.classList.add('bg-darkborder');
+                }
+            }
+
+            document.getElementById('coreSubtitle').textContent = `Pilar 0${currentIndex + 1} / 03`;
+            renderPillarCard(pillarsData[currentIndex]);
+        }
+
+        function renderPillarCard(data) {
+            const card = document.getElementById('pillarDisplayCard');
+            card.classList.remove('animate-panel');
+            void card.offsetWidth;
+            card.classList.add('animate-panel');
+
+            const specsHTML = data.specs.map(item => `
+                <div class="bg-darkbg/80 border border-darkborder p-3.5 rounded-xl flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
+                    <span class="text-[11px] font-black uppercase tracking-wider text-emerald-400 sm:w-40 shrink-0">${item.label}:</span>
+                    <span class="text-xs text-gray-200 leading-relaxed">${item.value}</span>
+                </div>
+            `).join('');
+
+            const adHTML = data.adExample ? `
+                <div class="mt-4 bg-gold-500/10 border border-gold-500/30 rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-gold-400"><i class="fa-solid fa-bullhorn mr-1"></i> Ejemplo de Mensaje Publicitario</span>
+                        <button onclick="copyText('${data.adExample.replace(/"/g, '&quot;')}')" class="text-[10px] bg-darkbg hover:bg-gold-500 hover:text-darkbg text-gold-400 font-bold px-2.5 py-1 rounded-lg border border-gold-500/30 transition-all">
+                            <i class="fa-regular fa-copy"></i> Copiar Copy
+                        </button>
+                    </div>
+                    <p class="text-xs text-white italic font-medium leading-relaxed">${data.adExample}</p>
+                </div>
+            ` : '';
+
+            card.innerHTML = `
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-darkborder">
+                    <div>
+                        <span class="text-[10px] font-black uppercase tracking-widest text-gold-400 block mb-1">${data.badge}</span>
+                        <h3 class="text-2xl sm:text-3xl font-black text-white flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-amazon-500/15 border border-amazon-500/40 flex items-center justify-center text-amazon-400 text-lg">
+                                <i class="fa-solid ${data.icon}"></i>
+                            </span>
+                            ${data.title}
+                        </h3>
+                    </div>
+                    <span class="bg-amazon-500/10 border border-amazon-500/30 text-emerald-400 text-[11px] font-extrabold px-3 py-1 rounded-full">
+                        Ficha Técnica Oficial
+                    </span>
+                </div>
+
+                <!-- CUADRO DE IMAGEN CORRESPONDIENTE AL PILAR -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-bold text-gray-300 flex items-center gap-1.5">
+                            <i class="fa-regular fa-image text-amazon-400"></i> ${data.imageLabel}
+                        </span>
+                        <span class="text-[10px] font-mono text-gray-500">${data.imageSrc}</span>
+                    </div>
+                    <div class="img-dropzone rounded-2xl p-3 flex flex-col items-center justify-center min-h-[220px] max-h-[320px] overflow-hidden">
+                        <img src="${data.imageSrc}" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                             class="max-h-72 w-auto object-contain rounded-xl" 
+                             alt="${data.title}">
+                        <div class="flex flex-col items-center justify-center text-center p-4 text-gray-400 space-y-1.5">
+                            <i class="fa-solid fa-cloud-arrow-up text-2xl text-amazon-500"></i>
+                            <p class="text-xs font-bold text-gray-200">${data.imageLabel}</p>
+                            <p class="text-[11px] text-gray-400">${data.imageHint}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla Ficha Técnica -->
+                <div class="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">
+                    ${specsHTML}
+                </div>
+
+                ${adHTML}
+
+                <!-- Análisis y Resultado -->
+                <div class="mt-5 pt-5 border-t border-darkborder grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-darkbg/60 border border-darkborder p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-amazon-400 block mb-1">Análisis de la Marca</span>
+                        <p class="text-xs text-gray-300 leading-relaxed">${data.analysis}</p>
+                    </div>
+                    <div class="bg-amazon-900/30 border border-amazon-500/30 p-4 rounded-2xl">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-gold-400 block mb-1">Resultado Esperado</span>
+                        <p class="text-xs text-emerald-200 font-medium leading-relaxed">${data.result}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function copyColor(hex, name) {
+            navigator.clipboard.writeText(hex);
+            showToast(`Color ${name} (${hex}) copiado`);
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            showToast('Mensaje publicitario copiado al portapapeles');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2600);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextPillar();
+            if (e.key === 'ArrowLeft') prevPillar();
+        });
+
+        window.onload = () => {
+            updateCarouselUI();
+        };
+    </script>
+</body>
+</html>
