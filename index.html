@@ -250,7 +250,7 @@
                 </p>
             </div>
 
-            <!-- IMAGEN 01: PORTADA DEL COMPLEJO / SALAS DE CINE (Como en la página 1 del Word) -->
+            <!-- IMAGEN 01: PORTADA DEL COMPLEJO / SALAS DE CINE -->
             <div class="max-w-5xl mx-auto mb-10">
                 <div class="glass-panel rounded-3xl p-4 sm:p-6 shadow-2xl">
                     <div class="flex items-center justify-between mb-3 px-1">
@@ -260,17 +260,17 @@
                         <span class="text-[11px] text-gray-400 font-mono">Ruta: img/portada-cine.jpg</span>
                     </div>
                     <div class="img-dropzone rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[380px] flex flex-col items-center justify-center relative">
-                        <img src="img/portada-cine.jpg" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
-                             class="w-full max-h-[440px] object-cover rounded-xl" 
+                        <img src="img/salas.jpg" 
+                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');" 
+                             class="w-full max-h-[440px] object-cover rounded-xl shadow-lg" 
                              alt="Salas de Cine CINEMAZON - Fachada e Interior">
-                        <!-- Placeholder visible si aún no pones la imagen en la carpeta img/ -->
-                        <div class="flex flex-col items-center justify-center text-center p-8 text-gray-400 space-y-2">
+                        <!-- Placeholder oculto por defecto -->
+                        <div class="hidden flex-col items-center justify-center text-center p-8 text-gray-400 space-y-2">
                             <div class="w-14 h-14 rounded-2xl bg-amazon-500/10 border border-amazon-500/30 flex items-center justify-center text-amazon-400 text-2xl mb-1">
                                 <i class="fa-regular fa-image"></i>
                             </div>
                             <p class="text-sm font-bold text-gray-200">Imagen 01: Lobby y Salas de Cine CINEMAZON</p>
-                            <p class="text-xs text-gray-400 max-w-md">Guarda tu primera imagen del documento (Salas de Cine con mural amazónico) como <code class="text-emerald-400 bg-darkbg px-1.5 py-0.5 rounded">img/portada-cine.jpg</code></p>
+                            <p class="text-xs text-gray-400 max-w-md">Guarda tu imagen como <code class="text-emerald-400 bg-darkbg px-1.5 py-0.5 rounded">img/portada-cine.jpg</code></p>
                         </div>
                     </div>
                 </div>
@@ -467,7 +467,7 @@
     </section>
 
     <!-- =================================================================
-         SECCIÓN: EJERCICIO VISUAL (LAS 2 IMÁGENES DE TU DOCUMENTO)
+         SECCIÓN: EJERCICIO VISUAL (1 SOLA IMAGEN CENTRAL COMO PEDISTE)
          ================================================================= -->
     <section id="ejercicio-visual" class="py-16 bg-darkbg border-b border-darkborder">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -479,47 +479,28 @@
                 </p>
             </div>
 
-            <!-- Grid de 2 Columnas para las 2 ilustraciones conceptuales de tu documento -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Cuadro Imagen Ejercicio 1 -->
-                <div class="glass-panel rounded-3xl p-5 flex flex-col justify-between">
+            <!-- Contenedor Centrado para la Única Imagen del Ejercicio -->
+            <div class="max-w-3xl mx-auto">
+                <div class="glass-panel rounded-3xl p-5 flex flex-col justify-between shadow-2xl">
                     <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-extrabold text-amazon-400 uppercase tracking-wider">Propuesta Visual 01</span>
-                        <span class="text-[11px] text-gray-400 font-mono">img/ejercicio-selva-1.jpg</span>
+                        <span class="text-xs font-extrabold text-amazon-400 uppercase tracking-wider">Propuesta Visual del Eslogan</span>
+                        <span class="text-[11px] text-gray-400 font-mono">img/ejercicio-selva.jpg</span>
                     </div>
-                    <div class="img-dropzone rounded-2xl overflow-hidden h-72 sm:h-80 flex flex-col items-center justify-center">
-                        <img src="img/ejercicio-selva-1.jpg" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
-                             class="w-full h-full object-cover rounded-xl" 
-                             alt="Tucán con cinta de cine y canchita en la selva">
-                        <div class="flex flex-col items-center justify-center text-center p-6 text-gray-400 space-y-2">
-                            <i class="fa-solid fa-clapperboard text-3xl text-amazon-500"></i>
-                            <p class="text-xs font-bold text-gray-200">Imagen Ejercicio Visual 01</p>
-                            <p class="text-[11px] text-gray-400">Guarda tu arte del tucán con la cinta de película y canchita como <code class="text-emerald-400">img/ejercicio-selva-1.jpg</code></p>
+                    <div class="img-dropzone rounded-2xl overflow-hidden min-h-[300px] sm:min-h-[380px] flex flex-col items-center justify-center relative">
+                        <img src="img/ejercicio-selva.jpg" 
+                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');" 
+                             class="w-full max-h-[460px] object-cover rounded-xl shadow-lg" 
+                             alt="El Encuentro de la Selva con el Cine">
+                        <!-- Placeholder oculto por defecto -->
+                        <div class="hidden flex-col items-center justify-center text-center p-8 text-gray-400 space-y-2">
+                            <div class="w-14 h-14 rounded-2xl bg-amazon-500/10 border border-amazon-500/30 flex items-center justify-center text-amazon-400 text-2xl mb-1">
+                                <i class="fa-solid fa-clapperboard"></i>
+                            </div>
+                            <p class="text-sm font-bold text-gray-200">Ilustración: El Encuentro de la Selva con el Cine</p>
+                            <p class="text-xs text-gray-400 max-w-md">Guarda tu imagen de este ejercicio como <code class="text-emerald-400 bg-darkbg px-1.5 py-0.5 rounded">img/ejercicio-selva.jpg</code></p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Cuadro Imagen Ejercicio 2 -->
-                <div class="glass-panel rounded-3xl p-5 flex flex-col justify-between">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-extrabold text-gold-400 uppercase tracking-wider">Propuesta Visual 02</span>
-                        <span class="text-[11px] text-gray-400 font-mono">img/ejercicio-selva-2.jpg</span>
-                    </div>
-                    <div class="img-dropzone rounded-2xl overflow-hidden h-72 sm:h-80 flex flex-col items-center justify-center">
-                        <img src="img/ejercicio-selva-2.jpg" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
-                             class="w-full h-full object-cover rounded-xl" 
-                             alt="Sala de cine inmersiva en medio de la selva">
-                        <div class="flex flex-col items-center justify-center text-center p-6 text-gray-400 space-y-2">
-                            <i class="fa-solid fa-film text-3xl text-gold-400"></i>
-                            <p class="text-xs font-bold text-gray-200">Imagen Ejercicio Visual 02</p>
-                            <p class="text-[11px] text-gray-400">Guarda tu arte de la sala de cine con el proyector y vegetación como <code class="text-gold-400">img/ejercicio-selva-2.jpg</code></p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -627,9 +608,9 @@
                 badge: "Pilar 01 • Percepción y Construcción",
                 title: "1. IMAGOLOGÍA",
                 icon: "fa-eye",
-                imageSrc: "img/imagologia.png",
-                imageLabel: "Infografía: 1. Imagología (Tucán, Claqueta y Paleta)",
-                imageHint: "Guarda tu infografía de Imagología como img/imagologia.png",
+                imageSrc: "img/Imagología.png",
+                imageLabel: "Infografía Conceptual: 1. Imagología",
+                imageHint: "Archivo: img/Imagología.png",
                 specs: [
                     { label: "Definición", value: "Estudia cómo se construye y percibe la imagen de una marca ante el público." },
                     { label: "Aplicación", value: "Construcción de la imagen corporativa y digital de CINEMAZON." },
@@ -648,9 +629,9 @@
                 badge: "Pilar 02 • Significado Simbólico",
                 title: "2. ICONOLOGÍA",
                 icon: "fa-feather-pointed",
-                imageSrc: "img/logo-horizontal.png",
+                imageSrc: "img/logocine.png",
                 imageLabel: "Logotipo Oficial Horizontal CINEMAZON",
-                imageHint: "Guarda tu logotipo horizontal con el tucán como img/logo-horizontal.png",
+                imageHint: "Archivo: img/logocine.png",
                 specs: [
                     { label: "Definición", value: "Estudia e interpreta los significados simbólicos y culturales de las imágenes." },
                     { label: "Aplicación", value: "Uso de símbolos relacionados con el cine, la tecnología y la Selva Central." },
@@ -668,9 +649,9 @@
                 badge: "Pilar 03 • Identidad Comunicativa",
                 title: "3. IMAGEN VERBAL",
                 icon: "fa-comment-dots",
-                imageSrc: "img/dulceria-mockups.jpg",
+                imageSrc: "img/vasos y empaques.jpg",
                 imageLabel: "Aplicaciones de Marca: Vasos, Popcorn y Empaques Regionales",
-                imageHint: "Guarda tu foto de los vasos y empaques de dulcería como img/dulceria-mockups.jpg",
+                imageHint: "Archivo: img/vasos y empaques.jpg",
                 specs: [
                     { label: "Definición", value: "Conjunto de palabras, frases, mensajes y expresiones que construyen la identidad comunicativa de una marca." },
                     { label: "Aplicación", value: "Nombre comercial, eslogan, redes sociales (TikTok/Instagram), sitio web y carteleras." },
@@ -791,10 +772,10 @@
                     </div>
                     <div class="img-dropzone rounded-2xl p-3 flex flex-col items-center justify-center min-h-[220px] max-h-[320px] overflow-hidden">
                         <img src="${data.imageSrc}" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
-                             class="max-h-72 w-auto object-contain rounded-xl" 
+                             onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');" 
+                             class="max-h-72 w-auto object-contain rounded-xl shadow-lg" 
                              alt="${data.title}">
-                        <div class="flex flex-col items-center justify-center text-center p-4 text-gray-400 space-y-1.5">
+                        <div class="hidden flex-col items-center justify-center text-center p-4 text-gray-400 space-y-1.5">
                             <i class="fa-solid fa-cloud-arrow-up text-2xl text-amazon-500"></i>
                             <p class="text-xs font-bold text-gray-200">${data.imageLabel}</p>
                             <p class="text-[11px] text-gray-400">${data.imageHint}</p>
